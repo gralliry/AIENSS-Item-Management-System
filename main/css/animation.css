@@ -1,0 +1,21 @@
+@charset "UTF-8";
+@keyframes shadowTwinkling { 0% { }
+  50% { border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
+  100% { } }
+
+#loadingBar { width: 30px; height: 30px; border: 8px solid #ffffff; border-bottom-color: #779cea; border-radius: 50%; position: fixed; top: 50%; left: 50%; display: none; animation: rotation 1s linear infinite; }
+
+@keyframes rotation { 0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/*弹窗*/
+#popWindow { /* 形状设置 */ height: 40px; /* 居中设置*/ top: 0px; left: 50%; transform: translate(-50%, -100%); position: fixed; background-color: #efefef; border-radius: 4px; display: flex; flex-direction: row; align-items: center; transition: transform 1s; /*弹窗内容*/ }
+
+#popWindow i { display: flex; justify-content: center; align-items: center; }
+
+#popWindow i span { margin: 4px 2px auto 4px; font-size: 30px; }
+
+#popWindow p { margin-left: 2px; margin-right: 4px; text-align: center; color: #e98484; font-size: 20px; font-weight: 1000; font-family: "微软雅黑",serif; }

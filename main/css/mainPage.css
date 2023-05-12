@@ -1,0 +1,230 @@
+@charset "UTF-8";
+/*全局设置*/
+* { padding: 0; margin: 0px; }
+
+body { width: 100%; height: 100%; background-image: url("../file/mainPageBackground.jpg"); background-color: #9eb7ec; background-repeat: no-repeat; background-size: 100% auto; }
+
+button { border: 1px solid #cfd7d6; background-color: #efefef; font-size: 8px; transition: background-color 750ms; cursor: pointer; }
+
+button:hover { outline: none; background-color: #d6e8f6; animation: shadowTwinkling 3s linear 0s infinite; }
+
+input { border: 1px solid #cfd7d6; background-color: rgba(255, 255, 255, 0.3); text-align: center; overflow: hidden; }
+
+input:focus { outline: none; }
+
+input:hover { animation: shadowTwinkling 3s linear 0s infinite; }
+
+.iconfont { cursor: pointer; }
+
+@media screen and (max-width: 1220px) { #mainPage main section .operation { flex-direction: column; }
+  #mainPage main section .operation button { width: 50% !important; } }
+
+@media screen and (max-width: 870px) { #mainPage main { flex-direction: column-reverse; }
+  #mainPage main aside { width: 100% !important; height: 30% !important; }
+  #mainPage main section { width: 100% !important; height: 70% !important; }
+  #recordItemPage table tbody input, #selfItemPage table tbody input { font-size: 12px !important; } }
+
+@media screen and (max-width: 450px) { #mainPage { width: 100% !important; height: 100% !important; }
+  #mainPage header .inputBar div { width: 20% !important; } }
+
+@media screen and (min-width: 451px) and (max-width: 1000px) { #mainPage { width: 90% !important; height: 95% !important; } }
+
+@media screen and (min-width: 1001px) { #mainPage { width: 1000px !important; height: 800px !important; } }
+
+#mainPage { background: #efefef; position: fixed; border-radius: 8px; /*居中设置*/ top: 50%; left: -50%; transform: translate(-50%, -50%); /*块内元素摆放*/ display: flex; flex-direction: column; box-shadow: 0px 0px 10px 5px rgba(100, 99, 99, 0.3); pointer-events: all; transition: left 750ms,filter 1000ms; /* 头部 */ /* 中部 */ }
+
+#mainPage header { width: 100%; flex: 10; background-color: #6991e6; border-radius: 8px 8px 0px 0px; display: flex; }
+
+#mainPage header .quitBar { flex: 1; display: flex; align-items: center; }
+
+#mainPage header .quitBar span { margin-left: 10px; font-size: 30px; transition: background-color 500ms; border-radius: 50%; }
+
+#mainPage header .quitBar span:hover { background-color: #82a4d9; }
+
+#mainPage header .inputBar { flex: 18; margin-right: 15px; display: flex; justify-content: flex-end; align-items: center; }
+
+#mainPage header .inputBar input { width: 80%; height: 60%; border-radius: 10px 0px 0px 10px; }
+
+#mainPage header .inputBar div { width: 7%; height: 58%; border: 1px solid #cfd7d6; border-radius: 0px 10px 10px 0px; background-color: rgba(255, 255, 255, 0.3); display: flex; justify-content: center; align-items: center; }
+
+#mainPage header .inputBar div span { font-size: 20px; }
+
+#mainPage header .infoBar { flex: 6; display: flex; justify-content: flex-end; align-items: center; }
+
+#mainPage header .infoBar .info { overflow: hidden; white-space: nowrap; display: flex; justify-content: flex-start; align-items: center; }
+
+#mainPage header .infoBar .info span { margin: 0px; font-size: 10px; font-weight: 400; }
+
+#mainPage header .infoBar .info input { color: #d55454; border: 0px; background-color: #6991e6; font-weight: 600; }
+
+#mainPage header .infoBar .iconfont { border-radius: 50%; font-size: 30px; text-align: center; margin-right: 10px; transition: background-color 500ms; }
+
+#mainPage header .infoBar .iconfont:hover { background-color: #82a4d9; }
+
+#mainPage main { width: 100%; flex: 90; display: flex; }
+
+#mainPage main aside { width: 25%; height: 100%; display: flex; justify-content: center; align-items: center; }
+
+#mainPage main aside ul { width: 98%; background-color: #d1d5db; border-radius: 4px; overflow-x: hidden; overflow-y: auto; }
+
+#mainPage main aside ul::-webkit-scrollbar { width: 1px; }
+
+#mainPage main aside ul li { font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; list-style-type: none; white-space: pre-line; text-align: left; margin-left: 5px; border: 1px solid #cfd7d6; background-color: rgba(106, 116, 115, 0.2); }
+
+#mainPage main aside ul li:first-child { color: #178FE6; font-weight: 800; }
+
+#mainPage main section { width: 75%; height: 100%; display: flex; justify-content: center; align-items: center; }
+
+#mainPage main section table { width: 98%; height: 98%; background-color: #c5cbd7; border-radius: 4px; margin-left: 5px; display: flex; flex-direction: column; }
+
+#mainPage main section table thead { width: 100%; height: 4%; }
+
+#mainPage main section table thead tr { height: 100%; }
+
+#mainPage main section table thead tr th span { font-size: 18px; color: #178FE6; }
+
+#mainPage main section table thead tr .operation { margin-right: 10px; }
+
+#mainPage main section table tbody { width: 100%; height: 96%; overflow-x: hidden; overflow-y: scroll; }
+
+#mainPage main section table tbody::-webkit-scrollbar { width: 10px; }
+
+#mainPage main section table tbody::-webkit-scrollbar-thumb { background-color: #717985; }
+
+#mainPage main section table tbody tr td { border: 1px solid #cfd7d6; background-color: rgba(106, 116, 115, 0.3); }
+
+#mainPage main section table tbody tr .id input, #mainPage main section table tbody tr .name input, #mainPage main section table tbody tr .quantity input { height: 100%; width: 100%; color: #313437; font-weight: 600; font-size: 15px; background-color: rgba(255, 255, 255, 0); }
+
+#mainPage main section table tbody tr .operation button { height: 24px; margin: 3px auto; width: 25%; margin: 3px; font-weight: 500; background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; pointer-events: inherit; }
+
+#mainPage main section table tbody .icon-tianjia { font-size: 30px; }
+
+#mainPage main section table tr { width: 100%; display: flex; }
+
+#mainPage main section table tr th, #mainPage main section table tr td { display: flex; justify-content: center; align-items: center; }
+
+#mainPage main section table tr .id { flex: 9; }
+
+#mainPage main section table tr .name { flex: 50; }
+
+#mainPage main section table tr .quantity { flex: 9; }
+
+#mainPage main section table tr .operation { flex: 15; }
+
+#recordItemPage { top: 50%; left: 50%; transform: translate(-50%, -50%); position: fixed; width: 0px; height: 0px; opacity: 0; z-index: 20; border-radius: 4px; outline: none; overflow: hidden; white-space: nowrap; transition: width 500ms,height 500ms,opacity 1000ms; }
+
+#recordItemPage header { width: 100%; height: 8%; background-color: #6991e6; display: flex; justify-content: center; align-items: center; }
+
+#recordItemPage header summary { color: red; font-weight: 400; text-align: center; }
+
+#recordItemPage section { width: 100%; height: 92%; background-color: #dedbdb; display: flex; justify-content: center; align-items: center; }
+
+#recordItemPage section table { width: 98%; height: 98%; border-radius: 4px; background-color: #c5cbd7; }
+
+#recordItemPage section table thead th span { text-align: center; color: #178FE6; font-weight: 800; }
+
+#recordItemPage section table thead th:last-child { margin-right: 5px; }
+
+#recordItemPage section table tbody { height: 330px; overflow-x: hidden; overflow-y: scroll; border-radius: 1px; display: flex; flex-direction: column; justify-content: flex-start; }
+
+#recordItemPage section table tbody::-webkit-scrollbar { width: 5px; }
+
+#recordItemPage section table tbody::-webkit-scrollbar-thumb { background-color: #717985; }
+
+#recordItemPage section table tbody tr td { height: 100%; }
+
+#recordItemPage section table tbody tr td input { height: 100%; width: 100%; font-size: 18px; font-weight: 550; font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; color: #4f5359; background-color: transparent; }
+
+#recordItemPage section table tbody tr .person, #recordItemPage section table tbody tr .quantity, #recordItemPage section table tbody tr .borrowtime, #recordItemPage section table tbody tr .isreturn, #recordItemPage section table tbody tr .returntime { border: 1px solid #cfd7d6; background-color: rgba(106, 116, 115, 0.3); }
+
+#recordItemPage section table tr { width: 100%; display: flex; }
+
+#recordItemPage section table tr .person { flex: 6; }
+
+#recordItemPage section table tr .quantity { flex: 3; }
+
+#recordItemPage section table tr .borrowtime { flex: 11; }
+
+#recordItemPage section table tr .isreturn { flex: 3; }
+
+#recordItemPage section table tr .returntime { flex: 11; }
+
+#borrowItemPage { width: 0px; height: 0px; z-index: 20; opacity: 0; top: 50%; left: 50%; transform: translate(-50%, -50%); position: fixed; border-radius: 8px; background-color: #6991e6; outline: none; overflow: hidden; white-space: nowrap; transition: width 500ms,height 500ms,opacity 1000ms; display: flex; flex-direction: column; }
+
+#borrowItemPage header { width: 100%; height: 15%; background-color: #6991e6; display: flex; justify-content: center; align-items: center; }
+
+#borrowItemPage header summary { color: red; font-size: 20px; font-weight: 400; }
+
+#borrowItemPage section { width: 100%; height: 85%; background-color: #a9b0b9; display: flex; flex-direction: column; }
+
+#borrowItemPage section div { width: 100%; flex: 1; display: flex; }
+
+#borrowItemPage section div .attr, #borrowItemPage section div .value { display: flex; justify-content: center; align-items: center; }
+
+#borrowItemPage section div .attr { flex: 2; height: 100%; margin-right: 10px; text-align: right; }
+
+#borrowItemPage section div .value { flex: 7; height: auto; margin: 3px; text-align: center; overflow: hidden; white-space: nowrap; }
+
+#borrowItemPage section .fixedInfo .value { background-color: rgba(255, 255, 255, 0.3); }
+
+#borrowItemPage section .fixedInfo .value input { height: 100%; width: 100%; font-size: 16px; }
+
+#borrowItemPage section .variaInfo .value { display: flex; justify-content: center; align-items: center; }
+
+#borrowItemPage section .variaInfo .value input { width: 100%; height: 85%; text-align: center; }
+
+#borrowItemPage section .variaInfo .value input:focus { outline: none; }
+
+#borrowItemPage section .variaInfo .value select { height: 80%; margin: auto 0px auto; border: 1px solid #178FE6; border-radius: 3px; }
+
+#borrowItemPage section .variaInfo .value select:focus { outline: none; }
+
+#borrowItemPage section .variaInfo .value #borrowItemQuan { width: 99%; text-align: center; }
+
+#borrowItemPage section .variaInfo .value #yearOption, #borrowItemPage section .variaInfo .value #monthOption, #borrowItemPage section .variaInfo .value #dayOption { width: 33%; }
+
+#borrowItemPage section .specialInfo { justify-content: center; align-items: center; }
+
+#borrowItemPage section .specialInfo button { height: 80%; width: 80%; margin-bottom: 5px; border-radius: 4px; }
+
+#selfItemPage { top: 50%; left: 50%; transform: translate(-50%, -50%); position: fixed; width: 0px; height: 0px; opacity: 0; z-index: 20; border-radius: 4px; outline: none; overflow: hidden; white-space: nowrap; transition: width 500ms,height 500ms,opacity 1000ms; }
+
+#selfItemPage header { width: 100%; height: 8%; background-color: #6991e6; display: flex; justify-content: center; align-items: center; }
+
+#selfItemPage header summary { color: red; font-weight: 800; text-align: center; }
+
+#selfItemPage section { width: 100%; height: 92%; background-color: #dedbdb; display: flex; justify-content: center; align-items: center; }
+
+#selfItemPage section table { width: 98%; height: 98%; border-radius: 4px; background-color: #c5cbd7; }
+
+#selfItemPage section table thead th span { text-align: center; color: #178FE6; font-weight: 550; font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; }
+
+#selfItemPage section table thead th:last-child { margin-right: 5px; }
+
+#selfItemPage section table tbody { height: 330px; overflow-x: hidden; overflow-y: scroll; border-radius: 1px; display: flex; flex-direction: column; justify-content: flex-start; }
+
+#selfItemPage section table tbody::-webkit-scrollbar { width: 5px; }
+
+#selfItemPage section table tbody::-webkit-scrollbar-thumb { background-color: #717985; }
+
+#selfItemPage section table tbody tr td { height: 100%; }
+
+#selfItemPage section table tbody tr td input { width: 100%; height: 100%; font-size: 18px; font-weight: 600; background-color: transparent; }
+
+#selfItemPage section table tbody tr .id, #selfItemPage section table tbody tr .item, #selfItemPage section table tbody tr .quantity, #selfItemPage section table tbody tr .borrowtime, #selfItemPage section table tbody tr .operation { border: 1px solid #cfd7d6; background-color: rgba(106, 116, 115, 0.3); }
+
+#selfItemPage section table tr { display: flex; }
+
+#selfItemPage section table tr .id, #selfItemPage section table tr .item, #selfItemPage section table tr .quantity, #selfItemPage section table tr .borrowtime, #selfItemPage section table tr .operation { display: flex; justify-content: center; align-items: center; }
+
+#selfItemPage section table tr .id { flex: 2; }
+
+#selfItemPage section table tr .item { flex: 8; }
+
+#selfItemPage section table tr .quantity { flex: 2; }
+
+#selfItemPage section table tr .borrowtime { flex: 6; }
+
+#selfItemPage section table tr .operation { flex: 2; }
+
+#selfItemPage section table tr .operation button { width: 85%; height: 80%; border-radius: 4px; background-color: rgba(255, 255, 255, 0.5); }
