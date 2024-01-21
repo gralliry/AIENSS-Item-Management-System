@@ -3,7 +3,7 @@
     //获取请求头
     if(empty($_SERVER["HTTP_USER_AGENT"])){
         //诈骗网站
-        header('location:https://www.bilibili.com/video/BV1GJ411x7h7/?spm_id_from=333.337.search-card.all.click&vd_source=0af4f42a5ec72547b0e9d312e6aed0e9');
+        header('location:https://www.bilibili.com/video/BV1GJ411x7h7');
         exit;
     }
 ?>
