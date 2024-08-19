@@ -14,9 +14,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>自科部物品借用管理</title>
-    <link href="/main/css/mainPage.css?v=20230210.1" rel="stylesheet" type="text/css">
-    <link href="/main/css/animation.css?v=20230201" rel="stylesheet" type="text/css">
-    <link href='/main/css/font/iconfont.css?v=20230201' rel='stylesheet' type='text/css'>
+    <link href="./main/css/mainPage.css?v=20230210.1" rel="stylesheet" type="text/css">
+    <link href="./main/css/animation.css?v=20230201" rel="stylesheet" type="text/css">
+    <link href='./main/css/font/iconfont.css?v=20230201' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -247,10 +247,10 @@ EOF;
     <div id='loadingBar'></div>
     <input id='publicKey' value='<?php session_start();echo $_SESSION['loginPublicKey'];?>' style='display:none'>
     <input id='token' value='<?php session_start();echo $_SESSION['token'];?>' style='display:none'>
-    <script type='text/javascript' src='/main/js/jquery.min.js?v=20230201'></script>
-    <script type='text/javascript' src='/main/js/jsencrypt.min.js?v=20230201' ></script>
-    <script type='text/javascript' src='/main/js/function.js?v=20230201' ></script>
-    <script type='text/javascript' src='/main/js/mainPage.js?v=20230201'></script>
+    <script type='text/javascript' src='./main/js/jquery.min.js?v=20230201'></script>
+    <script type='text/javascript' src='./main/js/jsencrypt.min.js?v=20230201' ></script>
+    <script type='text/javascript' src='./main/js/function.js?v=20230201' ></script>
+    <script type='text/javascript' src='./main/js/mainPage.js?v=20230201'></script>
 </body>
 
 </html>
