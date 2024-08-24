@@ -5,8 +5,8 @@ class Database
     // 静态用self 非静态用this
     //服务器模式
     private static string $dsn;
-    private static string $userName;
-    private static string $userPassword;
+    private static string $username;
+    private static string $password;
 
     public static string $accountTable = 'account';
     public static string $itemTable = 'item';
@@ -16,14 +16,14 @@ class Database
     private static PDO $database;
 
     // 静态构造函数初始化数据库连接信息
-    private static function init()
+    public static function init()
     {
         $host = getenv('MYSQL_HOST') ?: "127.0.0.1";
         $port = getenv('MYSQL_PORT') ?: "3306";
         $database = getenv('MYSQL_DATABASE') ?: "nss_item_manage";
         self::$dsn = 'mysql:host='.$host.';port='.$port.';dbname='.$database;
-        self::$userName = getenv('MYSQL_USERNAME') ?: 'nss_item_manage';
-        self::$userPassword = getenv('MYSQL_PASSWORD') ?: 'mD3FaxpiaAtBMNCZ';
+        self::$username = getenv('MYSQL_USERNAME') ?: 'nss_item_manage';
+        self::$password = getenv('MYSQL_PASSWORD') ?: 'mD3FaxpiaAtBMNCZ';
     }
 
     // 直接执行SQL指令 // 需要防止sql注入
@@ -50,7 +50,7 @@ class Database
     public static function connect()
     {
         self::init();
-        self::$database = new PDO(self::$dsn, self::$userName, self::$userPassword);
+        self::$database = new PDO(self::$dsn, self::$username, self::$password);
         if (self::$database->errorCode()) {//是否连接数据库成功
             exit(json_encode([
                 'opCode' => 320,
