@@ -14,6 +14,8 @@ if (isset($_SESSION['loginTime']) && time() - $_SESSION['loginTime'] < 3) {
 $_SESSION['loginTime'] = time();
 //获取原始数据
 $content = file_get_contents("php://input");
+//解码JSON数据
+$content = json_decode($content, true);
 //获取用户输入的用户名密码
 $account = $content['account'];
 $password = $content['password'];

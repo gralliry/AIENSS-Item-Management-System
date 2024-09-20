@@ -8,7 +8,7 @@ let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 // 全局按键
 document.onkeydown = function (event) {
     // 回车键进入搜索已加载的
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
         $("#showItemInfo>tr[class='itemRow']").each(function () {
             if ($(this).find('.name>input').val().search($('#searchContent').val()) >= 0) {
                 $(this).css('display', 'flex');

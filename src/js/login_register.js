@@ -1,8 +1,5 @@
 //公钥
 let apiPath = '/api/';
-let publicKey = $('#publicKey').val();
-let encryptor = new JSEncrypt()  // 创建加密对象实例
-encryptor.setPublicKey(publicKey)//设置公钥
 //
 $(function () {
     // 开局动画加载
@@ -15,12 +12,12 @@ $('#turnBackBtn').click(backLoginPage);
 // 登录提交
 $('#loginSubmitBtn').click(function () {
     startLoading('#loginSubmitBtn');
+    console.log("提交")
     $.ajax({
         url: apiPath + 'login.php',
         type: 'post',
         data: JSON.stringify({
-            'account': $('#loginAccount').val(),
-            'password': $('#loginPassword').val()
+            'account': $('#loginAccount').val(), 'password': $('#loginPassword').val()
         }),
         error: function (XMLHttpRequest) {
             popWindow('请求错误');
@@ -41,18 +38,14 @@ $('#loginSubmitBtn').click(function () {
 $('#registerSubmitBtn').click(function () {
     startLoading('#registerSubmitBtn');
     $.ajax({
-        url: apiPath + 'register.php',
-        type: 'post',
-        data: JSON.stringify({
+        url: apiPath + 'register.php', type: 'post', data: JSON.stringify({
             'account': $('#registerAccount').val(),
             'password': $('#registerPassword').val(),
             'code': $('#registerCode').val(),
-        }),
-        error: function (XMLHttpRequest) {
+        }), error: function (XMLHttpRequest) {
             popWindow('请求错误');
-        },
-        success: function (response) {
-            if (response['opCode'] == 100) {
+        }, success: function (response) {
+            if (response['opCode'] === 100) {
                 regsiterToken = response['token'];
                 $('#loginAccount').val($('#registerAccount').val());
                 $('#loginPassword').val($('#registerPassword').val());
@@ -62,8 +55,7 @@ $('#registerSubmitBtn').click(function () {
                 backLoginPage();
             }
             popWindow(response['message']);
-        },
-        complete: function () {
+        }, complete: function () {
             endLoading('#registerSubmitBtn');
         }
     })
@@ -72,18 +64,13 @@ $('#registerSubmitBtn').click(function () {
 $('#getCodeBtn').click(function () {
     startLoading('#getCodeBtn');
     $.ajax({
-        url: apiPath + 'email.php',
-        type: 'post',
-        data: JSON.stringify({
+        url: apiPath + 'email.php', type: 'post', data: JSON.stringify({
             'account': $('#registerAccount').val(),
-        }),
-        error: function (XMLHttpRequest) {
+        }), error: function (XMLHttpRequest) {
             popWindow('请求错误');
-        },
-        success: function (response) {
+        }, success: function (response) {
             popWindow(response['message']);
-        },
-        complete: function () {
+        }, complete: function () {
             endLoading('#getCodeBtn');
         }
     })

@@ -26,8 +26,8 @@ if (empty($_SERVER["HTTP_USER_AGENT"])) {
     <summary class='title'>自科部物品管理系统</summary>
     <!-- security_check -->
     <form id='loginForm' onsubmit="return false;">
-        <input id='loginAccount' type='text' required placeholder='账号' value="">
-        <input id='loginPassword' type='password' required placeholder='密码' value="">
+        <label for='loginAccount'></label><input id='loginAccount' type='text' required placeholder='账号' value="">
+        <label for='loginPassword'></label><input id='loginPassword' type='password' required placeholder='密码' value="">
         <div class="btnBar">
             <button id='loginSubmitBtn' type='submit'>登录</button>
             <button id='registerBtn' type='button'>注册</button>
@@ -53,9 +53,9 @@ if (empty($_SERVER["HTTP_USER_AGENT"])) {
     <p></p>
 </div>
 <div id='loadingBar'></div>
-<script type='text/javascript' src='src/js/jquery.min.js?v=20230201'></script>
-<script type='text/javascript' src='src/js/function.js?v=20230201'></script>
-<script type='text/javascript' src='src/js/login_register.js?v=20230201'></script>
+<script type='text/javascript' src='src/js/jquery.min.js?v=20240921'></script>
+<script type='text/javascript' src='src/js/function.js?v=20240921'></script>
+<script type='text/javascript' src='src/js/login_register.js?v=20240921'></script>
 </body>
 
 </html>

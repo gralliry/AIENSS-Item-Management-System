@@ -35,7 +35,6 @@ if (!isset($_SESSION['loginAccount'])) {
             <div class="info">
                 <!-- 权限 -->
                 <span id="authority"><?php
-                    session_start();
                     $authority = $_SESSION['loginAuthority'];
                     if ($authority == 1) {
                         echo '游客';
@@ -46,9 +45,9 @@ if (!isset($_SESSION['loginAccount'])) {
                     }
                     ?></span>
                 <input id="name"
-                       value="<?php session_start();
+                       value="<?php
                        echo $_SESSION['loginName']; ?>"
-                       size="<?php session_start();
+                       size="<?php
                        $length = mb_strlen($_SESSION['loginName']);
                        echo $length > 3 ? $length + 1 : $length; ?>"
                        maxlength="8"
@@ -81,7 +80,7 @@ if (!isset($_SESSION['loginAccount'])) {
                 <li>日志</li>
                 <?php
                 //连接数据库
-                include_once './src/api/database.php';
+                include_once './api/database.php';
                 //查找数据
                 $sql = "select * from " . Database::$logTable . " order by time desc";//降序asc
                 $info = Database::execute($sql);
@@ -112,10 +111,9 @@ if (!isset($_SESSION['loginAccount'])) {
                 </thead>
                 <tbody id="showItemInfo">
                 <?php
-                session_start();
                 $authority = $_SESSION['loginAuthority'];
                 //连接数据库
-                include_once './src/api/database.php';
+                include_once './api/database.php';
                 //查找数据
                 $sql = "select * from " . Database::$itemTable . " order by time desc";
                 $info = Database::execute($sql);
@@ -223,11 +221,10 @@ EOF;
             </thead>
             <tbody id="showSelfItemInfo">
             <?php
-            session_start();
             //连接数据库
-            include_once './src/api/database.php';
+            include_once './api/database.php';
             //准备预处理 //写入操作信息
-            $sql = "select itemid,itemname,borrowquantity,borrowtime from " . Database::$operationTable . " where accountid=? and isreturn=0";
+            $sql = "select itemid, itemname, borrowquantity, borrowtime from " . Database::$operationTable . " where accountid=? and isreturn=0";
             $info = Database::execute($sql, $_SESSION['loginId']);
             while ($result = $info->fetch(PDO::FETCH_ASSOC)) {
                 echo <<<EOF
@@ -250,12 +247,10 @@ EOF;
     <p></p>
 </view>
 <div id='loadingBar'></div>
-<input id='token' value='<?php session_start();
-echo $_SESSION['token']; ?>' style='display:none'>
-<script type='text/javascript' src='src/js/jquery.min.js?v=20230201'></script>
-<script type='text/javascript' src='src/js/jsencrypt.min.js?v=20230201'></script>
-<script type='text/javascript' src='src/js/function.js?v=20230201'></script>
-<script type='text/javascript' src='src/js/mainPage.js?v=20230201'></script>
+<label for='token'></label><input id='token' value='<?php echo $_SESSION['token']; ?>' style='display:none'>
+<script type='text/javascript' src='src/js/jquery.min.js?v=20240921'></script>
+<script type='text/javascript' src='src/js/function.js?v=20240921'></script>
+<script type='text/javascript' src='src/js/mainPage.js?v=20240921'></script>
 </body>
 
 </html>

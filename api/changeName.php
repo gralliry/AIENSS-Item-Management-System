@@ -6,6 +6,8 @@ header('Content-Type:application/json;charset=utf-8');
 include_once './verify.php';
 //获取原始数据
 $content = file_get_contents("php://input");
+//解码JSON数据
+$content = json_decode($content, true);
 //获取数据
 $name = $content['name'];
 //名字是否为空

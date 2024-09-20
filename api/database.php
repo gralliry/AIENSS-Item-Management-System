@@ -1,6 +1,8 @@
 <?php
 
 namespace api;
+use PDO;
+
 class Database
 {
     // 静态用self 非静态用this
