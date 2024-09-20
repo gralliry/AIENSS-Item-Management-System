@@ -1,5 +1,6 @@
 <?php
 
+namespace api;
 class Database
 {
     // 静态用self 非静态用this
@@ -18,10 +19,10 @@ class Database
     // 静态构造函数初始化数据库连接信息
     public static function init()
     {
-        $host = getenv('MYSQL_HOST') ?: "127.0.0.1";
-        $port = getenv('MYSQL_PORT') ?: "3306";
+        $host = getenv('MYSQL_HOST') ?: "120.78.82.53";
+        $port = getenv('MYSQL_PORT') ?: "9001";
         $database = getenv('MYSQL_DATABASE') ?: "nss_item_manage";
-        self::$dsn = 'mysql:host='.$host.';port='.$port.';dbname='.$database;
+        self::$dsn = 'mysql:host=' . $host . ';port=' . $port . ';dbname=' . $database;
         self::$username = getenv('MYSQL_USERNAME') ?: 'nss_item_manage';
         self::$password = getenv('MYSQL_PASSWORD') ?: 'mD3FaxpiaAtBMNCZ';
     }

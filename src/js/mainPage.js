@@ -1,14 +1,10 @@
 // 公共内容
-var apiPath = '/main/api/';
-var publicKey = $('#publicKey').val();
-var token = $('#token').val();
-//
-var encryptor = new JSEncrypt()  // 创建加密对象实例
-encryptor.setPublicKey(publicKey)//设置公钥
+let apiPath = '/api/';
+let token = $('#token').val();
 // 当前时间对象
-var time = new Date();
+let time = new Date();
 // 基础月份定义
-var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 // 全局按键
 document.onkeydown = function (event) {
     // 回车键进入搜索已加载的
@@ -22,35 +18,37 @@ document.onkeydown = function (event) {
         })
     }
 }
+
 //表格自动调整
 function reSize() {
     //同时关闭高度
     $("#showLogInfo").css('display', 'none');
     $("#showItemInfo").css('display', 'none');
     //调整列表
-    var aside = $("#showLogInfo").parent();
+    let aside = $("#showLogInfo").parent();
     $("#showLogInfo").css('height', aside.height() * 0.98 + 'px');
     //表格
-    var table = $("#showItemInfo").parent();
-    var thead = table.find('thead');
+    let table = $("#showItemInfo").parent();
+    let thead = table.find('thead');
     $("#showItemInfo").css('height', (table.height() - thead.height()) + 'px');
     //同时开启
     $("#showLogInfo").css('display', 'block');
     $("#showItemInfo").css('display', 'block');
 }
+
 //修改宽度自动适应
 window.onresize = reSize;
 // 主页内容
 $(function () {
     reSize()
     //物品借阅页面 //生成下拉框
-    for (var i = 0, now = time.getFullYear(); i < 4; i++) {
+    for (let i = 0, now = time.getFullYear(); i < 4; i++) {
         $('#yearOption').append(`<option>` + (now + i) + `</option>`)
     }
-    for (var i = time.getMonth() + 1; i <= 12; i++) {
+    for (let i = time.getMonth() + 1; i <= 12; i++) {
         $('#monthOption').append(`<option>` + i + `</option>`)
     }
-    for (var i = time.getDate(); i <= months[time.getMonth()]; i++) {
+    for (let i = time.getDate(); i <= months[time.getMonth()]; i++) {
         $('#dayOption').append(`<option>` + i + `</option>`)
     }
     // 开局动画加载
@@ -62,9 +60,9 @@ $('#quitLogin').click(function () {
     $.ajax({
         url: apiPath + 'logout.php',
         type: 'post',
-        data: encryptor.encrypt(JSON.stringify({
+        data: JSON.stringify({
             'token': token
-        })),
+        }),
         complete: function () {
             endLoading('#quitLogin');
         }
@@ -82,7 +80,7 @@ $('#searchBtn').click(function () {
     })
 })
 // 个人名字
-var accountName;
+let accountName;
 //保存修改前名字
 $('#name').focus(function () {
     accountName = $('#name').val();
@@ -94,10 +92,10 @@ $('#name').change(function () {
         url: apiPath + 'changeName.php',
         type: 'post',
         dataType: 'json',
-        data: encryptor.encrypt(JSON.stringify({
+        data: JSON.stringify({
             'token': token,
             'name': $('#name').val()
-        })),
+        }),
         error: function (XMLHttpRequest) {
             popWindow('请求错误');
         },
@@ -119,18 +117,18 @@ $('#name').change(function () {
 })
 // 绑定记录按钮事件
 $('#showItemInfo').on('click', '.record', function () {
-    var grandfather = $(this).parent().parent();
+    let grandfather = $(this).parent().parent();
     $('#recordItemPage').focus();
     startLoading();
     $.ajax({
         url: apiPath + 'record.php',
         type: 'post',
         dataType: 'json',
-        data: encryptor.encrypt(JSON.stringify({
+        data: JSON.stringify({
             'token': token,
             'itemId': grandfather.find('.id>input').val(),
             'itemName': grandfather.find('.name>input').val(),
-        })),
+        }),
         error: function (XMLHttpRequest) {
             popWindow('请求错误');
         },
@@ -141,16 +139,16 @@ $('#showItemInfo').on('click', '.record', function () {
                 setTimeout(window.location.href = '/index.php', 1000);
             } else if (response['opCode'] == 100) {
                 $('#showItemRecordInfo').empty();
-                var allData = response['data'];
-                for (var i = 0, j = allData.length; i < j; i++) {
-                    var simpleData = allData[i];
+                let allData = response['data'];
+                for (let i = 0, j = allData.length; i < j; i++) {
+                    let simpleData = allData[i];
                     $('#showItemRecordInfo').append(`
                     <tr>
-                        <td class="person"><input value='`+ simpleData['accountname'] + `' disabled></th>
-                        <td class="quantity"><input value='`+ simpleData['borrowquantity'] + `' disabled></th>
-                        <td class="borrowtime"><input value='`+ simpleData['borrowtime'] + `' disabled></th>
-                        <td class="isreturn"><input value='`+ (Number(simpleData['isreturn']) ? '是' : '否') + `' disabled></th>
-                        <td class="returntime"><input value='`+ (Number(simpleData['isreturn']) ? simpleData['returntime'] : '/') + `' disabled></th>
+                        <td class="person"><input value='` + simpleData['accountname'] + `' disabled></th>
+                        <td class="quantity"><input value='` + simpleData['borrowquantity'] + `' disabled></th>
+                        <td class="borrowtime"><input value='` + simpleData['borrowtime'] + `' disabled></th>
+                        <td class="isreturn"><input value='` + (Number(simpleData['isreturn']) ? '是' : '否') + `' disabled></th>
+                        <td class="returntime"><input value='` + (Number(simpleData['isreturn']) ? simpleData['returntime'] : '/') + `' disabled></th>
                     </tr>
                     `)
                 }
@@ -158,12 +156,12 @@ $('#showItemInfo').on('click', '.record', function () {
                 popWindow(response['message']);
             }
         },
-        complete:function(){
+        complete: function () {
             endLoading();
         }
     })
 })
-$('#recordItemPage').focus(function(){
+$('#recordItemPage').focus(function () {
     //打开记录页面
     $(this).css({
         'width': $("#showItemInfo").width() + 'px',
@@ -173,7 +171,7 @@ $('#recordItemPage').focus(function(){
     //背景蒙版
     lockMainPage();
 });
-$('#recordItemPage').blur(function (){
+$('#recordItemPage').blur(function () {
     //关闭记录页面
     $(this).css({
         'width': '0px',
@@ -184,19 +182,19 @@ $('#recordItemPage').blur(function (){
     unlockMainPage();
 })
 // 借用信息(元素)
-var borrowItemQuantity;
+let borrowItemQuantity;
 // 绑定借阅按钮事件
 $('#showItemInfo').on('click', '.borrow', function () {
     // 保存借阅按下时的对应物品信息
-    var grandfather = $(this).parent().parent();
+    let grandfather = $(this).parent().parent();
     $('#borrowId').val(grandfather.find('.id>input').val());
     $('#borrowName').val(grandfather.find('.name>input').val());
     borrowItemQuantity = grandfather.find('.quantity>input');
-    var quantity = Number(borrowItemQuantity.val());
+    let quantity = Number(borrowItemQuantity.val());
     $('#borrowQuan').val(quantity);
     //借阅数量限制
     $('#borrowItemQuan').empty();
-    for(var i=(quantity == 0?0:1);i<quantity+1;i++){
+    for (let i = (quantity == 0 ? 0 : 1); i < quantity + 1; i++) {
         $('#borrowItemQuan').append(`<option>` + i + `</option>`)
     }
     // 展示弹窗
@@ -206,16 +204,16 @@ $('#showItemInfo').on('click', '.borrow', function () {
 //限制借阅时间选择
 $('#yearOption').change(function () {
     console.log('true');
-    var year = $('#yearOption').val();
-    var month = $('#monthOption').val();
-    var day = $('#dayOption').val();
+    let year = $('#yearOption').val();
+    let month = $('#monthOption').val();
+    let day = $('#dayOption').val();
     $('#monthOption').empty();
-    for (var i = (year == time.getFullYear() ? time.getMonth() + 1 : 1); i <= 12; i++) {
+    for (let i = (year == time.getFullYear() ? time.getMonth() + 1 : 1); i <= 12; i++) {
         $('#monthOption').append(`<option>` + i + `</option>`)
     }
     $('#monthOption').val(month = Math.max(month, time.getMonth() + 1));
     $('#dayOption').empty();
-    for (var i = (year == time.getFullYear() && month == time.getMonth() + 1 ? time.getDate() : 1); i <= months[month - 1] + (year % 4 == 0 && month == 2 ? 1 : 0); i++) {
+    for (let i = (year == time.getFullYear() && month == time.getMonth() + 1 ? time.getDate() : 1); i <= months[month - 1] + (year % 4 == 0 && month == 2 ? 1 : 0); i++) {
         $('#dayOption').append(`<option>` + i + `</option>`)
     }
     $('#dayOption').val(day = Math.min(day, months[month - 1] + (year % 4 == 0 && month == 2 ? 1 : 0)));
@@ -224,11 +222,11 @@ $('#yearOption').change(function () {
     }
 })
 $('#monthOption').change(function () {
-    var year = $('#yearOption').val();
-    var month = $('#monthOption').val();
-    var day = $('#dayOption').val();
+    let year = $('#yearOption').val();
+    let month = $('#monthOption').val();
+    let day = $('#dayOption').val();
     $('#dayOption').empty();
-    for (var i = (year == time.getFullYear() && month == time.getMonth() + 1 ? time.getDate() : 1); i <= months[month - 1] + (year % 4 == 0 && month == 2 ? 1 : 0); i++) {
+    for (let i = (year == time.getFullYear() && month == time.getMonth() + 1 ? time.getDate() : 1); i <= months[month - 1] + (year % 4 == 0 && month == 2 ? 1 : 0); i++) {
         $('#dayOption').append(`<option>` + i + `</option>`)
     }
     $('#dayOption').val(day = Math.min(day, months[month - 1] + (year % 4 == 0 && month == 2 ? 1 : 0)));
@@ -236,12 +234,12 @@ $('#monthOption').change(function () {
         $('#dayOption').val(day = Math.max(day, time.getDate()));
     }
 })
-$('#borrowItemQuan,#yearOption,#monthOption,#dayOption,#confirmBorrow').focus(function(){
+$('#borrowItemQuan,#yearOption,#monthOption,#dayOption,#confirmBorrow').focus(function () {
     // 展示弹窗
     $('#borrowItemPage').focus();
 })
 // 展示弹窗
-$('#borrowItemPage').focus(function(){
+$('#borrowItemPage').focus(function () {
     $(this).css({
         // 'width': $("#showItemInfo").width() + 'px',
         'width': '400px',
@@ -268,7 +266,7 @@ $('#confirmBorrow').click(function () {
         url: apiPath + 'borrow.php',
         type: 'post',
         dataType: 'json',
-        data: encryptor.encrypt(JSON.stringify({
+        data: JSON.stringify({
             'token': token,
             'itemId': $('#borrowId').val(),
             'itemName': $('#borrowName').val(),
@@ -277,7 +275,7 @@ $('#confirmBorrow').click(function () {
             'year': $('#yearOption').val(),
             'month': $('#monthOption').val(),
             'day': $('#dayOption').val()
-        })),
+        }),
         error: function (XMLHttpRequest) {
             popWindow('请求错误');
         },
@@ -292,10 +290,10 @@ $('#confirmBorrow').click(function () {
                 //更新个人主页
                 $('#showSelfItemInfo').prepend(`
                 <tr>
-                    <td class="id"><input value='`+ $('#borrowId').val() + `' disabled></td>
-                    <td class="item"><input value='`+ $('#borrowName').val() + `' disabled></td>
-                    <td class="quantity"><input value='`+ $('#borrowItemQuan').val() + `' disabled></td>
-                    <td class="borrowtime"><input value='`+ getCurrentTime() + `' disabled></td>
+                    <td class="id"><input value='` + $('#borrowId').val() + `' disabled></td>
+                    <td class="item"><input value='` + $('#borrowName').val() + `' disabled></td>
+                    <td class="quantity"><input value='` + $('#borrowItemQuan').val() + `' disabled></td>
+                    <td class="borrowtime"><input value='` + getCurrentTime() + `' disabled></td>
                     <td class="operation"><button class="return">归还</button></td>
                 </tr>
                 `)
@@ -315,32 +313,32 @@ $('#confirmBorrow').click(function () {
     })
 })
 // 修改信息
-var oldName, oldQuantity;
+let oldName, oldQuantity;
 // 保存修改前信息
-$('#showItemInfo').on('focus','.modifyName,.modifyQuantity', function () {
-    var grandfather = $(this).parent().parent();
+$('#showItemInfo').on('focus', '.modifyName,.modifyQuantity', function () {
+    let grandfather = $(this).parent().parent();
     oldName = grandfather.find('.name>.modifyName').val();
     oldQuantity = grandfather.find('.quantity>.modifyQuantity').val();
 })
 // 确认修改
 $('#showItemInfo').on('change', '.modifyName,.modifyQuantity', function () {
-    var grandfather = $(this).parent().parent();
-    var itemId = grandfather.find('.id>span').text();
-    var itemName = grandfather.find('.name>.modifyName');
-    var itemQuantity = grandfather.find('.quantity>.modifyQuantity')
-    var isModifye = confirm('是否修改为:\n' + itemQuantity.val() + '个\n"' + itemName.val() + '"');
+    let grandfather = $(this).parent().parent();
+    let itemId = grandfather.find('.id>span').text();
+    let itemName = grandfather.find('.name>.modifyName');
+    let itemQuantity = grandfather.find('.quantity>.modifyQuantity')
+    let isModifye = confirm('是否修改为:\n' + itemQuantity.val() + '个\n"' + itemName.val() + '"');
     if (isModifye) {
         startLoading('#showItemInfo .modifyName,.modifyQuantity');
         $.ajax({
             url: apiPath + 'modify.php',
             type: 'post',
             dataType: 'json',
-            data: encryptor.encrypt(JSON.stringify({
+            data: JSON.stringify({
                 'token': token,
                 'itemId': itemId,
                 'itemName': itemName.val(),
                 'itemQuantity': itemQuantity.val()
-            })),
+            }),
             error: function (XMLHttpRequest) {
                 popWindow('请求错误');
             },
@@ -359,30 +357,30 @@ $('#showItemInfo').on('change', '.modifyName,.modifyQuantity', function () {
                 endLoading('#showItemInfo .modifyName,.modifyQuantity');
             }
         })
-    }else{
+    } else {
         itemName.val(oldName);
         itemQuantity.val(oldQuantity);
     }
 })
 //删除物品
 $('#showItemInfo').on('click', '.delete', function () {
-    var grandfather = $(this).parent().parent();
-    var itemId = grandfather.find('.id>span').text();
-    var itemName = grandfather.find('.name>.modifyName').val();
-    var itemQuantity = grandfather.find('.quantity>.modifyQuantity').val()
-    var isDelete = confirm('是否删除:\n' + itemQuantity + '个\n"' + itemName + '"');
+    let grandfather = $(this).parent().parent();
+    let itemId = grandfather.find('.id>span').text();
+    let itemName = grandfather.find('.name>.modifyName').val();
+    let itemQuantity = grandfather.find('.quantity>.modifyQuantity').val()
+    let isDelete = confirm('是否删除:\n' + itemQuantity + '个\n"' + itemName + '"');
     if (isDelete) {
         startLoading('#showItemInfo .delete');
         $.ajax({
             url: apiPath + 'delete.php',
             type: 'post',
             dataType: 'json',
-            data: encryptor.encrypt(JSON.stringify({
+            data: JSON.stringify({
                 'token': token,
                 'itemId': itemId,
                 'itemName': itemName,
                 'itemQuantity': itemQuantity
-            })),
+            }),
             error: function (XMLHttpRequest) {
                 popWindow('请求错误');
             },
@@ -406,21 +404,21 @@ $('#showItemInfo').on('click', '.delete', function () {
     }
 })
 // 账号权限
-var accountAuthority = $('#authority').text();
+let accountAuthority = $('#authority').text();
 //绑定添加事件按钮
 $('.icon-tianjia').click(function () {
-    var itemName = $('#appendName').val();
-    var itemQuantity = $('#appendQuantity').val();
+    let itemName = $('#appendName').val();
+    let itemQuantity = $('#appendQuantity').val();
     startLoading('#showItemInfo .icon-tianjia');
     $.ajax({
         url: apiPath + 'append.php',
         type: 'post',
         dataType: 'json',
-        data: encryptor.encrypt(JSON.stringify({
+        data: JSON.stringify({
             'token': token,
             'itemName': itemName,
             'itemQuantity': itemQuantity
-        })),
+        }),
         error: function (XMLHttpRequest) {
             popWindow('请求错误');
             console.log(XMLHttpRequest)
@@ -435,12 +433,12 @@ $('.icon-tianjia').click(function () {
                 info = itemQuantity + "个 '" + itemName + "'";
                 $('#showLogInfo').children(':first').after("<li><hr><" + getCurrentTime() + "><br>已添加<br>" + info + "</li>");
                 // 刷新物品页面
-                var lastId = response['data']['lastId'];
+                let lastId = response['data']['lastId'];
                 $('#showItemInfo').prepend(`
                 <tr class='itemRow'>
-                    <td class="id"><span>`+ lastId + `</span></td>
-                    <td class="name"><input class='modifyName' value='`+ itemName + `'></td>
-                    <td class="quantity"><input class='modifyQuantity' value='`+ itemQuantity + `'></td>
+                    <td class="id"><span>` + lastId + `</span></td>
+                    <td class="name"><input class='modifyName' value='` + itemName + `'></td>
+                    <td class="quantity"><input class='modifyQuantity' value='` + itemQuantity + `'></td>
                     <td class="operation">
                         <button class='record' title='查看物品借用记录'>记录</button>`
                     + (accountAuthority == '用户' || accountAuthority == '管理员' ? '<button class="borrow" title="借用该物品">借用</button>' : '')
@@ -462,10 +460,10 @@ $('.icon-tianjia').click(function () {
 $('.icon-yonghu').click(function () {
     $('#selfItemPage').focus();
 })
-$('#showSelfItemInfo').on('focus','.return',function(){
+$('#showSelfItemInfo').on('focus', '.return', function () {
     $('#selfItemPage').focus();
 })
-$('#selfItemPage').focus(function() {
+$('#selfItemPage').focus(function () {
     //打开个人界面
     $('#selfItemPage').css({
         'width': $('#showItemInfo').width() + 'px',
@@ -475,7 +473,7 @@ $('#selfItemPage').focus(function() {
     //背景蒙版
     lockMainPage();
 })
-$('#selfItemPage').blur(function() {
+$('#selfItemPage').blur(function () {
     //关闭个人界面
     $(this).css({
         'width': '0px',
@@ -487,22 +485,22 @@ $('#selfItemPage').blur(function() {
 })
 //绑定归还按钮事件
 $('#showSelfItemInfo').on('click', '.return', function () {
-    var grandfather = $(this).parent().parent();
-    var itemId = grandfather.find('.id>input').val();
-    var itemName = grandfather.find('.item>input').val();
-    var borrowQuantity = grandfather.find('.quantity>input').val();
+    let grandfather = $(this).parent().parent();
+    let itemId = grandfather.find('.id>input').val();
+    let itemName = grandfather.find('.item>input').val();
+    let borrowQuantity = grandfather.find('.quantity>input').val();
     startLoading('#showSelfItemInfo .return');
 
     $.ajax({
         url: apiPath + 'return.php',
         type: 'post',
         dataType: 'json',
-        data: encryptor.encrypt(JSON.stringify({
+        data: JSON.stringify({
             'token': token,
             'itemId': itemId,
             'itemName': itemName,
             'borrowQuantity': borrowQuantity
-        })),
+        }),
         error: function (XMLHttpRequest) {
             popWindow('请求错误');
             console.log(XMLHttpRequest);
@@ -516,11 +514,11 @@ $('#showSelfItemInfo').on('click', '.return', function () {
                 //更新个人信息
                 grandfather.remove();
                 //更新物品信息
-                var result = $('#showItemInfo').find('.itemRow:contains(' + itemId + ')');
+                let result = $('#showItemInfo').find('.itemRow:contains(' + itemId + ')');
                 if (result) {
                     result.find('.modifyQuantity').val(Number(result.find('.modifyQuantity').val()) + Number(borrowQuantity));
                 }
-                
+
             }
         },
         complete: function () {
@@ -528,6 +526,7 @@ $('#showSelfItemInfo').on('click', '.return', function () {
         }
     })
 })
+
 // 对背景蒙版
 function lockMainPage() {
     $('#mainPage').css({
@@ -535,6 +534,7 @@ function lockMainPage() {
         'filter': 'blur(1px) brightness(80%)'
     });
 }
+
 //解除背景蒙版
 function unlockMainPage() {
     $('#mainPage').css({
